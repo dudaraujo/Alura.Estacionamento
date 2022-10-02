@@ -11,7 +11,12 @@ namespace Alura.Estacionamento.Modelos
         private string _placa;
         private string _proprietario;
         private TipoVeiculo _tipo;
-     
+        //private string _ticket;
+
+        //public string IdTicket { get; set; }
+        //public string Ticket { get => _ticket; set => _ticket = value; }
+
+
         //Propriedades   
 
         public string Placa
@@ -29,7 +34,7 @@ namespace Alura.Estacionamento.Modelos
                 }
                 for (int i = 0; i < 3; i++)
                 {
-                    //checa se os 3 primeiros caracteres são numeros
+                    //checa se os 3 primeiros caracteres são letras
                     if (char.IsDigit(value[i]))
                     {
                         throw new FormatException("Os 3 primeiros caracteres devem ser letras!");
@@ -40,7 +45,7 @@ namespace Alura.Estacionamento.Modelos
                 {
                     throw new FormatException("O 4° caractere deve ser um hífen");
                 }
-                //checa se os 3 primeiros caracteres são numeros
+                //checa se os 4 ultimos caracteres são numeros
                 for (int i = 4; i < 8; i++)
                 {
                     if (!char.IsDigit(value[i]))
@@ -67,7 +72,19 @@ namespace Alura.Estacionamento.Modelos
         public string Modelo { get; set; }        
         public string Proprietario
         {
-            get; set;
+            get
+            {
+                return _proprietario;
+            }
+
+            set
+            {
+                if(value.Length < 3)
+                {
+                    throw new System.FormatException("Nome do proprietário precisa ter mais de 3 letras");
+                }
+                _proprietario = value;
+            }
         }
         public DateTime HoraEntrada { get; set; }
         public DateTime HoraSaida { get; set; }   
